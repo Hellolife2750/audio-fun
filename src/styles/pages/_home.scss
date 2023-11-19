@@ -1,0 +1,80 @@
+#home {
+    width: 40%;
+    height: 90%;
+
+    audio {
+        display: none;
+    }
+
+    .main-container {
+        width: 100%;
+        height: 100%;
+
+    }
+
+    .tool-bar {
+        width: 100%;
+        @include flexMid;
+        justify-content: flex-end;
+
+        .interactable {
+            font-size: 1.2rem;
+        }
+    }
+
+    .audios-container {
+        margin: 0 auto;
+        width: 70%;
+        height: 70%;
+        margin-bottom: 1rem;
+
+        overflow-y: scroll;
+    }
+
+    .player-controls {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 100%;
+        height: 15%;
+
+        .interactable {
+            font-size: 1.2rem
+        }
+
+        .interactable.pause {
+            font-size: 2rem
+        }
+
+        .top {
+            @include flexMid;
+            justify-content: space-between;
+        }
+
+        .bottom {
+            @include flexMid;
+            justify-content: space-between;
+
+            .center {
+                @include flexMid;
+                width: 25%;
+                justify-content: space-between;
+            }
+        }
+    }
+
+}
+
+// middle screen size
+@media (max-width: 1000px) {
+    #app {
+        width: 70%;
+    }
+}
+
+// smartphone size
+@media (max-width: 700px) {
+    #app {
+        width: 100%;
+    }
+}

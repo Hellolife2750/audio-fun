@@ -1,0 +1,15 @@
+@import "./defaults/reset.css";
+@import "./defaults/variables";
+@import "./defaults/mixins";
+@import "./defaults/default";
+
+@import "./components/search-bar";
+@import "./components/audio-player";
+
+@import "./pages/home";
+
+// middle screen size
+@media (max-width: 1000px) {}
+
+// smartphone size
+@media (max-width: 700px) {}

@@ -1,0 +1,79 @@
+#root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    @include flexMid();
+
+}
+
+body {
+    min-height: 100vh;
+    height: 100vh;
+    font-family: "Ubuntu", sans-serif;
+    overflow: hidden;
+    color: $first-color;
+    @include flexMid;
+    //background-color: $second-color;
+
+    background: linear-gradient(231deg, #246655, #373737, #636363);
+    background-size: 600% 600%;
+
+    animation: AnimationName 15s cubic-bezier(.17, .67, .83, .67) infinite;
+
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 14% 0%
+    }
+
+    50% {
+        background-position: 87% 100%
+    }
+
+    100% {
+        background-position: 14% 0%
+    }
+}
+
+input,
+textarea {
+    font-family: "Ubuntu",
+        sans-serif;
+}
+
+.interactable {
+    background: none;
+    font-size: 1rem;
+    color: $first-color;
+    //padding: .5rem;
+    width: 2em;
+    height: 2em;
+    @include flexMid;
+    border-radius: 100%;
+    transition: all .2s;
+}
+
+.interactable:hover,
+.interactable:active {
+    background: rgba(1, 1, 1, .5);
+}
+
+
+//masquer les scrollbars
+::-webkit-scrollbar {
+    display: none;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 0.2em;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}

@@ -1,0 +1,32 @@
+#audio-player {
+    width: 100%;
+    background: rgba(1, 1, 1, .25);
+    border-radius: $titles-font-size;
+    padding: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    //outline: 2px solid white;
+
+    audio {
+        display: none;
+    }
+
+    .player {
+        @include flexMid;
+        justify-content: space-between;
+    }
+
+
+    .title {
+        font-size: $titles-font-size;
+        margin-bottom: .2rem;
+    }
+
+    .duration {
+        font-size: $duration-font-size;
+    }
+}
+
+#audio-player.playing {
+    border: 2px solid whitesmoke;
+}

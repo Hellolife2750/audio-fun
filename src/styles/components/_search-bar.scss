@@ -1,0 +1,28 @@
+#search-bar {
+    width: 100%;
+    height: 3.5rem;
+    @include flexMid;
+    justify-content: space-around;
+
+    .search-bar-container {
+        @include flexMid;
+        justify-content: space-between;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        padding-top: .2rem;
+        padding-bottom: .2rem;
+        width: 80%;
+        //height: 50%;
+        border: 2px solid $first-color;
+        border-radius: .3rem;
+
+        .search-input {
+            background: none;
+            color: white;
+            width: 90%;
+            font-size: 1rem;
+        }
+    }
+
+
+}

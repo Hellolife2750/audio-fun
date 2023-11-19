@@ -1,0 +1,19 @@
+@mixin flexMid($justify : center) {
+    display: flex;
+    justify-content: $justify;
+    align-items: center;
+}
+
+@mixin blured($r: 0, $g: 0, $b: 0, $intensity: 10px) {
+    backdrop-filter: blur($intensity);
+    -webkit-backdrop-filter: blur($intensity);
+    background: rgba($r, $g, $b, 0.5);
+}
+
+@mixin button($color: white, $backColor: rgb(82, 82, 218), $ftSize: 1rem, $bdRadius: .5rem) {
+    color: $color;
+    background-color: $backColor;
+    border-radius: $bdRadius;
+    font-size: $ftSize;
+    font-weight: bold;
+}
