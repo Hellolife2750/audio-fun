@@ -1,6 +1,6 @@
 //export functions
 
-export { }
+export const AUDIO_EXTENSION: string = ".ogg";
 
 export const AudiosCDN: string = "https://hellolife2750.github.io/funny-quotes/Audios-juil-22/";
 

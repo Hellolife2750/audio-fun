@@ -3,11 +3,12 @@ import axios from 'axios';
 import SearchBar from '../components/SearchBar';
 import AudioPlayer from '../components/AudioPlayer';
 import { audioFiles } from "../assets/data/audioNames";
-import { AudiosCDN, formatInput, randomIntBetween, downloadFile } from '../utils';
+import { AudiosCDN, formatInput, randomIntBetween, downloadFile, AUDIO_EXTENSION } from '../utils';
 
 const Home = () => {
 
     const audioBuffer = useRef<HTMLAudioElement | null>(null);
+    const [audioTimeStamp, setAudioTimeStamp] = useState<number>(0);
     const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
     const [playLoop, setPlayLoop] = useState(true);
     const [autoPlay, setAutoPlay] = useState<boolean>(true);
@@ -18,12 +19,15 @@ const Home = () => {
     const [displayedAudios, setDisplayedAudios] = useState<string[]>([]);
 
     const loadAudio = (index: number) => {
-        audioBuffer.current && (audioBuffer.current.src = AudiosCDN + displayedAudios[index]);
+        if (index) {
+            audioBuffer.current && (audioBuffer.current.src = AudiosCDN + displayedAudios[index] + AUDIO_EXTENSION);
+        }
     }
 
     const playAudio = (index: number) => {
+
         setPaused(false);
-        audioBuffer.current && (audioBuffer.current.src = AudiosCDN + displayedAudios[index]);
+        audioBuffer.current && (audioBuffer.current.src = AudiosCDN + displayedAudios[index] + AUDIO_EXTENSION);
         audioBuffer.current?.play();
         setCurrentAudioIndex(index);
         scrollIntoView(index);
@@ -93,7 +97,7 @@ const Home = () => {
 
     return (
         <div id="home">
-            <audio ref={audioBuffer} controls onEnded={audioEnded} />
+            <audio ref={audioBuffer} controls onEnded={audioEnded} onTimeUpdate={() => { if (audioBuffer.current) { setAudioTimeStamp(audioBuffer.current?.currentTime) } }} />
             <SearchBar masterSetKeyWords={setKeyWords} />
 
             <div className="main-container">
@@ -109,7 +113,7 @@ const Home = () => {
                 </div>
                 <div className="audios-container">
                     {displayedAudios.map((audioName: string, index: number) => (
-                        <AudioPlayer key={index} index={index} audioName={audioName} masterPlayAudio={playAudio} currentAudioIndex={currentAudioIndex} />
+                        <AudioPlayer key={index} index={index} audioName={audioName} masterPlayAudio={playAudio} currentAudioIndex={currentAudioIndex} currentAudio={audioBuffer.current} audioTimeStamp={audioTimeStamp} />
                     ))}
                 </div>
 
