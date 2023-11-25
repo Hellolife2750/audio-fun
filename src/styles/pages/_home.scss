@@ -67,14 +67,18 @@
 
 // middle screen size
 @media (max-width: 1000px) {
-    #app {
+    #home {
         width: 70%;
     }
 }
 
 // smartphone size
 @media (max-width: 700px) {
-    #app {
+    #home {
         width: 100%;
+
+        .audios-container {
+            width: 90%;
+        }
     }
 }

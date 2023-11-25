@@ -3,7 +3,7 @@ import axios from 'axios';
 import SearchBar from '../components/SearchBar';
 import AudioPlayer from '../components/AudioPlayer';
 import { audioFiles } from "../assets/data/audioNames";
-import { AudiosCDN, formatInput } from '../utils';
+import { AudiosCDN, formatInput, randomIntBetween } from '../utils';
 
 const Home = () => {
 
@@ -14,6 +14,7 @@ const Home = () => {
     const [keyWords, setKeyWords] = useState("");
     const [paused, setPaused] = useState(true);
     const [autoScroll, setAutoScroll] = useState<boolean>(true);
+    const [blendedPlay, setBlendedPlay] = useState<boolean>(false);
     const [displayedAudios, setDisplayedAudios] = useState<string[]>([]);
 
     const loadAudio = (index: number) => {
@@ -29,7 +30,9 @@ const Home = () => {
     }
 
     const playNext = () => {
-        let newIndex = currentAudioIndex + 1;
+        let newIndex;
+        !blendedPlay ? newIndex = currentAudioIndex + 1 : newIndex = randomIntBetween(0, displayedAudios.length - 1);
+
         if (newIndex < displayedAudios.length) {
             playAudio(newIndex);
         } else {
@@ -41,7 +44,8 @@ const Home = () => {
     }
 
     const playPrevious = () => {
-        let newIndex = currentAudioIndex - 1;
+        let newIndex;
+        !blendedPlay ? newIndex = currentAudioIndex - 1 : newIndex = randomIntBetween(0, displayedAudios.length - 1);
 
         if (newIndex >= 0) {
             playAudio(newIndex);
@@ -53,7 +57,7 @@ const Home = () => {
     const handlePause = () => {
         setPaused(!paused);
         let theAudio = audioBuffer.current;
-        paused ? theAudio?.play() : theAudio?.pause();
+        audioBuffer.current && paused ? theAudio?.play() : theAudio?.pause();
     }
 
     const audioEnded = () => {
@@ -123,8 +127,8 @@ const Home = () => {
                     </div>
 
                     <div className="bottom">
-                        <button className="interactable">
-                            <i className="fa-solid fa-music"></i>
+                        <button className="interactable" onClick={() => setBlendedPlay(!blendedPlay)}>
+                            <i className={`fa-solid fa-${blendedPlay ? 'shuffle' : 'arrow-right-long'}`}></i>
                         </button>
 
                         <div className="center">

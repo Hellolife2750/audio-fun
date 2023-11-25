@@ -6,4 +6,8 @@ export const AudiosCDN: string = "https://hellolife2750.github.io/funny-quotes/A
 
 export const removeAccents = (str: string) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-export const formatInput = (content: string) => removeAccents(content.toLowerCase())
+export const formatInput = (content: string) => removeAccents(content.toLowerCase());
+
+export const randomIntBetween = (min: number, max: number) => { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}

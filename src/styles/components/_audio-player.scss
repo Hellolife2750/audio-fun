@@ -17,10 +17,23 @@
     }
 
 
-    .title {
-        font-size: $titles-font-size;
-        margin-bottom: .2rem;
+    .scroll-title {
+        //overflow: hidden;
+        width: 85%;
+        //white-space: nowrap;
+
+
+        .title {
+            display: inline-block;
+            font-size: $titles-font-size;
+            margin-bottom: .2rem;
+
+            //animation: scrollText 5s linear infinite;
+        }
+
     }
+
+
 
     .duration {
         font-size: $duration-font-size;
@@ -29,4 +42,16 @@
 
 #audio-player.playing {
     border: 2px solid whitesmoke;
+}
+
+@keyframes scrollText {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+
+
 }

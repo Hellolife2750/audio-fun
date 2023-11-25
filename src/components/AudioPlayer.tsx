@@ -24,7 +24,7 @@ const AudioPlayer: React.FC<{ index: number, audioName: string, masterPlayAudio:
             <audio src={AudiosCDN + audioName} controls onCanPlayThrough={(e) => { formatDuration(e.currentTarget.duration) }}></audio>
             {/* <audio controls src={AudiosCDN + audioName} /> */}
             <div className="player" onClick={() => masterPlayAudio(index)}>
-                <p className="title">{audioName}</p>
+                <span className='scroll-title'><p className="title">{audioName}</p></span>
                 <p className="duration">{formatedDuration}</p>
             </div>
         </div >
