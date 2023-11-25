@@ -3,7 +3,7 @@ import axios from 'axios';
 import SearchBar from '../components/SearchBar';
 import AudioPlayer from '../components/AudioPlayer';
 import { audioFiles } from "../assets/data/audioNames";
-import { AudiosCDN, formatInput, randomIntBetween } from '../utils';
+import { AudiosCDN, formatInput, randomIntBetween, downloadFile } from '../utils';
 
 const Home = () => {
 
@@ -102,8 +102,8 @@ const Home = () => {
                         <i className={`fa-solid fa-${autoScroll ? 'eye' : 'eye-slash'}`}></i>
                     </button>
 
-                    <button className="interactable">
-                        <i className="fa-solid fa-bars"></i>
+                    <button className="interactable" onClick={() => { if (audioBuffer.current?.src) downloadFile(audioBuffer.current.src) }}>
+                        <i className="fa-solid fa-download"></i>
                     </button>
 
                 </div>
