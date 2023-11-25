@@ -4,7 +4,7 @@ import SearchBar from '../components/SearchBar';
 import AudioPlayer from '../components/AudioPlayer';
 import { audioFiles } from "../assets/data/audioNames";
 import { AudiosCDN, formatInput, randomIntBetween, downloadFile, AUDIO_EXTENSION } from '../utils';
-import { setPreferences, getPreferences } from '../assets/data/Preferences';
+import { setPreferences, getPreferences, Preferences } from '../assets/data/Preferences';
 
 
 const Home = () => {
@@ -20,7 +20,7 @@ const Home = () => {
     const [blendedPlay, setBlendedPlay] = useState<boolean>(false);
     const [displayedAudios, setDisplayedAudios] = useState<string[]>([]);
 
-    const [preferences, setPreferencesState] = useState<any>(null);
+    const [preferences, setPreferencesState] = useState<Preferences | null>(null);
 
     async function loadPreferences() {
         const storedPreferences = await getPreferences();
@@ -34,7 +34,7 @@ const Home = () => {
 
     function storePreferences() {
         if (preferences) {
-            const updatedPreferences = { ...preferences, autoPlay, autoScroll, blendedPlay };
+            const updatedPreferences: Preferences = { ...preferences, autoPlay, autoScroll, blendedPlay };
             setPreferencesState(updatedPreferences);
             setPreferences(updatedPreferences);
         }

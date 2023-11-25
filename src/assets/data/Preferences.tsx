@@ -1,3 +1,9 @@
+export interface Preferences {
+    autoPlay: boolean,
+    autoScroll: boolean,
+    blendedPlay: boolean,
+}
+
 export const getPreferences = () => {
     let desesialized_preferences = localStorage.getItem("preferences");
     let preferences;
