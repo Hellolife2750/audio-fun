@@ -4,6 +4,8 @@ import SearchBar from '../components/SearchBar';
 import AudioPlayer from '../components/AudioPlayer';
 import { audioFiles } from "../assets/data/audioNames";
 import { AudiosCDN, formatInput, randomIntBetween, downloadFile, AUDIO_EXTENSION } from '../utils';
+import { setPreferences, getPreferences } from '../assets/data/Preferences';
+
 
 const Home = () => {
 
@@ -17,6 +19,26 @@ const Home = () => {
     const [autoScroll, setAutoScroll] = useState<boolean>(true);
     const [blendedPlay, setBlendedPlay] = useState<boolean>(false);
     const [displayedAudios, setDisplayedAudios] = useState<string[]>([]);
+
+    const [preferences, setPreferencesState] = useState<any>(null);
+
+    async function loadPreferences() {
+        const storedPreferences = await getPreferences();
+        if (storedPreferences) {
+            setPreferencesState(storedPreferences);
+            setAutoPlay(storedPreferences.autoPlay);
+            setAutoScroll(storedPreferences.autoScroll);
+            setBlendedPlay(storedPreferences.blendedPlay);
+        }
+    }
+
+    function storePreferences() {
+        if (preferences) {
+            const updatedPreferences = { ...preferences, autoPlay, autoScroll, blendedPlay };
+            setPreferencesState(updatedPreferences);
+            setPreferences(updatedPreferences);
+        }
+    }
 
     const loadAudio = (index: number) => {
         if (index) {
@@ -87,6 +109,14 @@ const Home = () => {
     useEffect(() => {
         if (autoScroll) { scrollIntoView(currentAudioIndex) }
     }, [autoScroll])
+
+    useEffect(() => {
+        loadPreferences();
+    }, [])
+
+    useEffect(() => {
+        storePreferences();
+    }, [autoPlay, blendedPlay, autoScroll])
 
     const scrollIntoView = (index: number) => {
         if (autoScroll) {
