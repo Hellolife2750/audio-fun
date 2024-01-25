@@ -40,6 +40,24 @@ const Home = () => {
         }
     }
 
+    const bindKeys = () => {
+        document.addEventListener("keydown", (e) => {
+            let keyCode: string = e.code;
+            e.preventDefault();
+            if (keyCode === "Space") {
+
+                console.log('space');
+                handlePause();
+            } else if (keyCode === "ArrowRight") {
+                console.log('la');
+
+                playNext();
+            } else if (keyCode === "ArrowLeft") {
+                playPrevious();
+            }
+        })
+    }
+
     const loadAudio = (index: number) => {
         if (index) {
             audioBuffer.current && (audioBuffer.current.src = AudiosCDN + displayedAudios[index] + AUDIO_EXTENSION);
@@ -112,6 +130,7 @@ const Home = () => {
 
     useEffect(() => {
         loadPreferences();
+        //bindKeys();
     }, [])
 
     useEffect(() => {
